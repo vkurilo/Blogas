@@ -11,10 +11,11 @@
 <body>
     <header class = "p-5 text-center">
         <h1 class="fw-bold">MANO BLOGAS</h1>
-        <a class="headA fw-bold "  href="">+PRIDĖTI STRAIPSNĮ</a>
+        <a class="headA fw-bold newBlog"  href="">+PRIDĖTI STRAIPSNĮ</a>
         <hr>
-        <form class = 'd-flex flex-column align-items-center  col-auto p-5'>
-            <div class="mb-3 col-md-2 text-start pava">
+        <div id="invisible" class=''>
+        <form  class = 'd-flex flex-column align-items-center col-auto p-5 ' >
+            <div class="mb-3 col-md-4 text-start pava">
                 <label  class="form-label fw-bolder" id="name">Pavadinimas:</label>
                 <input type="text" class="form-control" name="pavadinimas" placeholder="Įveskite Pavadinimą">
             </div>
@@ -25,13 +26,16 @@
                 <label  class="form-label fw-bolder" id ='photo'>Nuotrauka:</label>
                 <input class="form-control" type="file" id="formFile">
               </div>
-              <button type="submit" class="btn btn-primary">Siūsti</button>
+            
+              <button id="send" type="submit" class="btn btn-primary">Siūsti</button>
           </div>
         </form>
 
+    </div>
     </header>
     
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script type="text/javascript" src="index.js"></script>
 </html>
