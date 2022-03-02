@@ -1,19 +1,15 @@
 {
-  "name": "backas",
+  "name": "frontas",
   "version": "1.0.0",
-  "description": "Mano blogas",
+  "description": "Mano Blogas",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "dev": "dead-server --port=3000 --host=localhost "
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.3"
-  },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "dead-server": "^1.0.6"
   }
 }
