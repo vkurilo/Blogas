@@ -1,0 +1,8 @@
+.headA{
+    text-decoration: none;
+    color:black;
+    
+}
+.headA:hover{
+    color:red;
+}
