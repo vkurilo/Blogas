@@ -20,9 +20,9 @@ app.get('/', (req,res) => {
     fs.readFile(filePath,'utf8', (err,data) => {
         let info = JSON.parse(data)
         if(err){
-            req.json({status:'failed', message:"Nepavyko perskaityti failo"})
+            throw err
         }else{ 
-            res.json({status:'success', jsonResp: info })
+            res.json(info)
             
         }
     })
@@ -97,6 +97,45 @@ app.post("/save-request", (req, res) => {
       }
     });
 })
+//trinam pagal id 
+
+app.delete('/:id', (req,res) => { 
+    let id = req.params.id
+
+    fs.readFile(filePath, 'utf8', (err,data) => { 
+        if(err){
+            return false
+        }else{
+            let info = JSON.parse(data);
+            let find = info.find((index) => index.id === parseInt(id));
+            
+            info.splice(info.indexOf(find), 1);
+      
+      
+            if(json.length ==0){
+              fs.unlink(filePath, err => {
+                if(err){
+                  res.json({status:'failed', message:'Nepavyko istrinti failo'})
+                }else{
+                  res.json({message: 'Failas istrintas'})
+                }
+              })
+            }else{
+            let jsonResp = JSON.stringify(info)
+            fs.writeFile(filePath,jsonResp , "utf8", (err) => {
+              if (err) {
+                res.json({message: "Įvyko klaida, toks įrašas nerastas", status:'failed'});
+              } else {
+              res.json({message:"Įrašas sėkmingai ištrintas", status:'success', jsonResp});
+              }
+            });
+          }}
+        });
+      });
+        
+    
+
+
 
 
 

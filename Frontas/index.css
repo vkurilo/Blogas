@@ -6,3 +6,20 @@
 .headA:hover{
     color:red;
 }
+
+
+.anchorA{
+    color:red;
+}
+
+.anchorA:hover{
+    color:black;
+}
+
+.anchorB{
+    color:grey;
+}
+
+.anchorB:hover{
+    color:black;
+}
