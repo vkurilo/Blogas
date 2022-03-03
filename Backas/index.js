@@ -27,11 +27,11 @@ app.use(express.json());
 const filePath = "./dp/data.json";
 
 
-app.use('/photos', express.static('uploads'))
+app.use('/uploads', express.static('uploads'))
 
 //nuotraukos
 
-app.post('/', upload.single('failas'), (req,res) => {
+app.post('/photo', upload.single('failas'), (req,res) => {
   let image = '/uploads/' + req.file.filename
 console.log(image)
   res.render('submited', {image, info:req.body})
@@ -57,7 +57,7 @@ app.get('/', (req,res) => {
 
 
 //gaunam id 
-app.get('/:id', (req,res) => {
+app.get('/new-blog/:id', (req,res) => {
     let id = req.params.id
   
     fs.readFile(filePath, 'utf8', (err,data) => {
@@ -127,7 +127,7 @@ app.post("/save-request", (req, res) => {
 })
 //trinam pagal id 
 
-app.delete('/:id', (req,res) => { 
+app.delete('/new-blog/:id', (req,res) => { 
     let id = req.params.id
 
     fs.readFile(filePath, 'utf8', (err,data) => { 

@@ -65,7 +65,7 @@ const newDisplay = (jsonObject) => {
       event.preventDefault();
 
       let id = value.getAttribute("data-id");
-      fetch(`http://localhost:3001/${id}`, {
+      fetch(`http://localhost:3001/new-blog/${id}`, {
         method: "DELETE",
       })
         .then((resp) => resp.json())
