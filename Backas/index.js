@@ -32,7 +32,7 @@ app.use('/photos', express.static('photos'))
 //nuotraukos
 
 app.post('/', upload.single('failas'), (req,res) => {
-  let image = './photos/' + req.file.filename
+  let image = '/photos/' + req.file.filename
 console.log(image)
   res.render('submited', {image, info:req.body})
 })
