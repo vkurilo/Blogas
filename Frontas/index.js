@@ -27,10 +27,12 @@ document.querySelector("#send").addEventListener("click", (event) => {
   let date = document.querySelector('#invisible input[name="date"]').value;
   document.querySelector('#invisible input[name="date"]').value = "";
 
+  let photo = document.querySelector('#invisible input[name="photo"]').value
+  document.querySelector('#invisible input[name="photo"]').value = ""
   fetch("http://localhost:3001/save-request", {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ name, about, date }),
+    body: JSON.stringify({ name, about, date,photo }),
   })
     .then((resp) => resp.json())
     .then((jsonObject) => {
@@ -46,10 +48,10 @@ const newDisplay = (jsonObject) => {
         inside += `     
     <div class="col-4">
     <img src="" alt="">
-    <h5>${val.name}</h5>
+    <h5 class = "">${val.name}</h5>
     <p>${val.date}</p>
     <p>${val.about}</p>
-<a href="#" data-id='${val.id}' class="anchorA delete">IŠTRINTI</a>   <a href="#" class='anchorB'>REDAGUOTI</a>
+<a href="#" data-id='${val.id}' class="anchorA delete fs-6">IŠTRINTI</a>   <a href="#" class='anchorB update fs-6'>REDAGUOTI</a>
   </div>`;
       });
 

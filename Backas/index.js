@@ -1,6 +1,25 @@
 import express, { json } from "express";
 import cors from "cors";
 import * as fs from "fs";
+import multer from 'multer'
+
+
+const storage  = multer.diskStorage({
+  destination: function(req, file, callback) {
+      callback(null, './photos')
+  },
+  filename: function(req, file, callback) {
+      callback(null, Date.now() + file.originalname)
+  }
+})
+
+const upload = multer({storage: storage})
+
+
+
+
+
+
 
 const app = express();
 app.use(cors());
@@ -8,7 +27,15 @@ app.use(express.json());
 const filePath = "./dp/data.json";
 
 
+app.use('/photos', express.static('photos'))
 
+//nuotraukos
+
+app.post('/', upload.single('failas'), (req,res) => {
+  let image = './photos/' + req.file.filename
+console.log(image)
+  res.render('submited', {image, info:req.body})
+})
 
 
 
