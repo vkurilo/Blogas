@@ -83,7 +83,10 @@ app.get('/new-blog/:id', (req,res) => {
   
   })
 //issaugom
-app.post("/save-request", (req, res) => {
+app.post("/save-request", upload.single('photo'), (req, res) => {
+    console.log(req.body)
+    console.log(req.file)
+    return false
     let masyvas = [];
   
     fs.access(filePath, (err) => {

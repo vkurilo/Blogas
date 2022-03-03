@@ -19,22 +19,27 @@ document.querySelector("#send").addEventListener("click", (event) => {
   let name = document.querySelector(
     '#invisible input[name="pavadinimas"]'
   ).value;
-  document.querySelector('#invisible input[name="pavadinimas"]').value = "";
+  //document.querySelector('#invisible input[name="pavadinimas"]').value = "";
   let about = document.querySelector(
     '#invisible textarea[name="aprasymas"]'
   ).value;
-  document.querySelector('#invisible textarea[name="aprasymas"]').value = "";
+  //document.querySelector('#invisible textarea[name="aprasymas"]').value = "";
 
 
   let date = document.querySelector('#invisible input[name="date"]').value;
-  document.querySelector('#invisible input[name="date"]').value = "";
+  //document.querySelector('#invisible input[name="date"]').value = "";
 
   let photo = document.querySelector('#invisible input[name="photo"]').value
-  document.querySelector('#invisible input[name="photo"]').value = ""
+  //document.querySelector('#invisible input[name="photo"]').value = ""
+  
+
+  let articleForm = document.querySelector('#add-article')
+  let formData = new FormData(articleForm);
+
   fetch("http://localhost:3001/save-request", {
     method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ name, about,date,photo }),
+    body: formData
+    //body: JSON.stringify({ name, about,date,photo }),
   })
     .then((resp) => resp.json())
     .then((jsonObject) => {
