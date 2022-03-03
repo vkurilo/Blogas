@@ -6,7 +6,7 @@ import multer from 'multer'
 
 const storage  = multer.diskStorage({
   destination: function(req, file, callback) {
-      callback(null, './photos')
+      callback(null, './uploads')
   },
   filename: function(req, file, callback) {
       callback(null, Date.now() + file.originalname)
@@ -27,12 +27,12 @@ app.use(express.json());
 const filePath = "./dp/data.json";
 
 
-app.use('/photos', express.static('photos'))
+app.use('/photos', express.static('uploads'))
 
 //nuotraukos
 
 app.post('/', upload.single('failas'), (req,res) => {
-  let image = '/photos/' + req.file.filename
+  let image = '/uploads/' + req.file.filename
 console.log(image)
   res.render('submited', {image, info:req.body})
 })
