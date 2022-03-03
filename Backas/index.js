@@ -113,6 +113,7 @@ app.post("/save-request", (req, res) => {
           
           json.push(req.body);
           let info = JSON.stringify(json)
+          console.log(info)
           fs.writeFile(filePath, info, "utf8", (err) => {
             if (!err) {
               res.json({status:'success', message: "Informacija issaugota", jsonResp: info });

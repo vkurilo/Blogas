@@ -2,9 +2,6 @@ let hide = document.querySelector("#invisible").classList;
 let galery = document.querySelector("#galery").classList;
 
 
-var NiceRandomNumber = Date.now();
-
-
 
 document.querySelector(".newBlog").addEventListener("click", () => {
   if (hide.value == "d-none") {
@@ -29,15 +26,15 @@ document.querySelector("#send").addEventListener("click", (event) => {
   document.querySelector('#invisible textarea[name="aprasymas"]').value = "";
 
 
-  // let date = document.querySelector('#invisible input[name="date"]').value;
-  // document.querySelector('#invisible input[name="date"]').value = "";
+  let date = document.querySelector('#invisible input[name="date"]').value;
+  document.querySelector('#invisible input[name="date"]').value = "";
 
   let photo = document.querySelector('#invisible input[name="photo"]').value
   document.querySelector('#invisible input[name="photo"]').value = ""
   fetch("http://localhost:3001/save-request", {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ name, about,photo }),
+    body: JSON.stringify({ name, about,date,photo }),
   })
     .then((resp) => resp.json())
     .then((jsonObject) => {
@@ -54,7 +51,7 @@ const newDisplay = (jsonObject) => {
     <div class="col-4">
     <img src="" alt="">
     <h4 >${val.name}</h4>
-    <p style="color:gray;"></p>
+    <p style="color:gray;">${val.date}</p>
     <h6 class = "fw-normal">${val.about}</h6>
 <a href="#" data-id='${val.id}' class="anchorA delete fs-6">IŠTRINTI</a>   <a href="#" class='anchorB update fs-6'>REDAGUOTI</a>
   </div>`;
