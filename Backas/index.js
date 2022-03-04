@@ -29,17 +29,6 @@ const filePath = "./dp/data.json";
 
 app.use('/uploads', express.static('uploads'))
 
-//nuotraukos
-
-app.post('/photo', upload.single('failas'), (req,res) => {
-  let image = '/uploads/' + req.file.filename
-console.log(image)
-  res.render('submited', {image, info:req.body})
-})
-
-
-
-
 
 
 //gaunam visa json
@@ -52,6 +41,7 @@ app.get('/', (req,res) => {
             res.json(info)
             
         }
+       
     })
 })
 
@@ -84,11 +74,14 @@ app.get('/new-blog/:id', (req,res) => {
   })
 //issaugom
 app.post("/save-request", upload.single('photo'), (req, res) => {
-    console.log(req.body)
-    console.log(req.file)
-    return false
+    
     let masyvas = [];
-  
+    let imageObj = req.file;
+    let photo;
+    if (imageObj !== undefined) {
+      photo = "/uploads/" + imageObj.filename;
+      req.body.photo = photo;
+    }
     fs.access(filePath, (err) => {
       if (err) {
         req.body.id = 0;
@@ -116,7 +109,7 @@ app.post("/save-request", upload.single('photo'), (req, res) => {
           
           json.push(req.body);
           let info = JSON.stringify(json)
-          console.log(info)
+          
           fs.writeFile(filePath, info, "utf8", (err) => {
             if (!err) {
               res.json({status:'success', message: "Informacija issaugota", jsonResp: info });
@@ -165,7 +158,38 @@ app.delete('/new-blog/:id', (req,res) => {
       });
         
     
-
+      app.put('/new-blog/:id', (req, res) => {
+        let id = req.params.id
+        console.log(id)
+        fs.readFile(filePath, 'utf8', (err, data) => {
+          if(err) {
+            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo'})
+            return false
+          }
+      
+          let json = JSON.parse(data)
+     
+          json.forEach((el, index) => {
+            if(el.id == id) {
+              console.log(req.body.pavadinimas)
+              json[index].pavadinimas = req.body.pavadinimas
+              json[index].date = req.body.date
+              json[index].aprasymas = req.body.aprasymas
+            } 
+          })
+      
+          let jsonResp = JSON.stringify(json)
+      
+          fs.writeFile(filePath, jsonResp, 'utf8', (err) => {
+            if(!err) {
+              res.json({status: 'success', message: 'Informacija issaugota', jsonResp: jsonResp})
+            } else {
+              res.json({status: 'failed', message: 'Nepavyko sukurti failo'})
+            }
+          })
+          
+        })
+      })
 
 
 
